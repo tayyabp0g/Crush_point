@@ -2,7 +2,7 @@ body {
   background: #4d83fe;
   min-height: 100vh;
   margin: 0;
-  font-family: 'Poppins', Arial, sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 .signup-container {
@@ -59,16 +59,16 @@ body {
   inset: 0;
   background: rgba(0,0,0,0.6); /* Dark overlay */
   z-index: 1;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-top-right-radius: 23px;
+  border-bottom-right-radius: 23px;
 }
 
 .signup-form {
   width: 100%;
-  max-width: 345px;
+  max-width: 563px;
   background: rgba(54, 67, 86, 0.75);
-  border-radius: 16px;
-  padding:42px 164px 49px 95px;
+  border-radius: -2px;
+  padding: 50px 91px 27px 102px; /* Top Right Bottom Left */
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -83,7 +83,7 @@ body {
   text-align: center;
   margin-bottom:-2px;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #fff;
   letter-spacing: 0.5px;
 }
@@ -116,6 +116,11 @@ body {
   border: 2px solid #fff;
 }
 
+.signup-form input::placeholder {
+  color: #fff;
+  opacity: 1; /* Fully white, not faded */
+}
+
 .password-fields {
   display: flex;
   gap: 8px;
@@ -129,11 +134,11 @@ body {
 }
 
 button[type="submit"] {
-  background: linear-gradient(90deg, #4d83fe 60%, #7b2ff2 100%);
+  background: #4D82FD;
   color: #fff;
   border: none;
   border-radius: 30px;
-  padding: 10px 1px;
+  padding: 14px 4px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -147,7 +152,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background: linear-gradient(90deg, #3561b7 60%, #7b2ff2 100%);
+  background:#4D82FD;
 }
 
 .login-link {
@@ -261,4 +266,8 @@ button[type="submit"]:hover {
   font-size: 1.02rem;
   font-weight: 400;
   letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6, button {
+  font-family: 'Nunito Sans', sans-serif;
 }

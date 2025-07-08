@@ -59,7 +59,7 @@ function Login() {
             </span>
           </div>
           <button type="submit" className="signup-btn">
-            login
+            Login
           </button>
           <div className="forgot-password-link">
             Forget Password?

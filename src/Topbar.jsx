@@ -1,0 +1,56 @@
+import React from "react";
+import { FaChevronDown } from "react-icons/fa";
+
+export default function Topbar({ user, language, onLanguageChange }) {
+  const languages = [
+    { code: "en", name: "English", flag: "🇺🇸" },
+    { code: "ur", name: "Urdu", flag: "🇵🇰" },
+    { code: "ar", name: "Arabic", flag: "🇸🇦" },
+    { code: "fr", name: "French", flag: "🇫🇷" },
+    // aur bhi add kar sakte ho
+  ];
+  const selectedLang = languages.find(l => l.code === language);
+
+  return (
+    <div className="flex items-center justify-between p-4 bg-white">
+      <div className="flex items-center space-x-2">
+        <button className="text-gray-500 focus:outline-none">
+          <svg width="24" height="24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <input type="text" placeholder="Search" className="ml-4 px-4 py-2 rounded bg-gray-100 focus:outline-none" />
+      </div>
+      {/* Language + User Info ek hi flex row me */}
+      <div className="flex items-center space-x-4">
+        {/* Flag + Dropdown */}
+        <div className="flex items-center">
+          <span className="mr-2 text-xl">{selectedLang?.flag}</span>
+          <select
+            value={language}
+            onChange={e => onLanguageChange(e.target.value)}
+            className="border rounded px-2 py-1 bg-white"
+          >
+            {languages.map(lang => (
+              <option key={lang.code} value={lang.code}>
+                {lang.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex items-center space-x-4">
+          {/* Avatar */}
+          <div className="flex items-center space-x-3">
+            <img src={user.avatar} alt="User" className="w-12 h-12 rounded-full" />
+            <div className="flex flex-col">
+              <span className="font-semibold text-xl">{user.name}</span>
+              <span className="text-sm text-gray-500">{user.role}</span>
+            </div>
+          </div>
+          {/* Down Arrow Button */}
+          <button className="ml-8 w-8 h-8 flex items-center justify-center rounded-full border border-gray-400">
+            <FaChevronDown className="text-lg text-gray-700" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

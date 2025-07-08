@@ -10,9 +10,7 @@ function Signup() {
   return (
     <div className="signup-container">
       <div className="signup-left">
-        {/* Yahan apna logo aur text daalen */}
         <img src={logo} alt="Crushpoint Logo" className="logo" />
-       
       </div>
       <div className="signup-right">
         <form className="signup-form">
