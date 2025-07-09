@@ -4,7 +4,6 @@ import {
   FaSignOutAlt,
   FaTachometerAlt,
   FaUser,
-<<<<<<< HEAD
   FaChartLine,
   FaBox,
   FaMoneyBillWave,
@@ -13,11 +12,6 @@ import Sidebar from "../../../components/Sidebar/Sidebar.jsx";
 import Topbar from "../../../components/Topbar/Topbar.jsx";
 import DashboardCard from "./dashboardcard/DashboardCard";
 import SalesChart from "../saleschart/SalesChart";
-=======
-} from "react-icons/fa";
-import Sidebar from "../../../components/Sidebar/Sidebar.jsx";
-import Topbar from "../../../components/Topbar/Topbar.jsx";
->>>>>>> 537a126e4047cb36f1035904d342dd45854f54ca
 
 const menuItems = [
   {
@@ -44,7 +38,6 @@ function Dashboard() {
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar />
-<<<<<<< HEAD
       <Topbar
         user={user}
         language={language}
@@ -106,18 +99,6 @@ function Dashboard() {
             />
           </div>
           <SalesChart />
-=======
-      <div className="flex-1 flex flex-col">
-        <Topbar
-          user={user}
-          language={language}
-          onLanguageChange={setLanguage}
-        />
-        <main className="flex-1 p-6">
-          {/* Yahan dashboard ka main content aayega */}
-          <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-          {/* ... */}
->>>>>>> 537a126e4047cb36f1035904d342dd45854f54ca
         </main>
       </div>
     </div>
