@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./Signup.css"; // Hum styling alag file mein rakhenge
-import logo from "./images/logo.png";
+import "../../App.css"; // Hum styling alag file mein rakhenge
+import logo from "../../../assets/logo.png";
 import { FaUserCircle, FaQuestionCircle } from "react-icons/fa";
 
 function Signup() {

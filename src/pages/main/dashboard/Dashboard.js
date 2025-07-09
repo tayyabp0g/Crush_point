@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import Topbar from "./Topbar.jsx";  
+import Sidebar from "../../../components/Sidebar/Sidebar.jsx";
+import Topbar from "../../../components/Topbar/Topbar.jsx";  
 import { FaTachometerAlt, FaUser, FaFileAlt, FaSignOutAlt } from "react-icons/fa";
 import logo from "./images/logo.png";
 

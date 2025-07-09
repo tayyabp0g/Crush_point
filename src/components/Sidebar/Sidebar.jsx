@@ -1,6 +1,6 @@
 import React from "react";
 import { FaTachometerAlt, FaBox, FaHeart, FaComments, FaListUl, FaFileAlt, FaCalendarAlt, FaCog, FaSignOutAlt } from "react-icons/fa";
-import logo from "./images/logo.png";
+import logo from "../../assets/logo.png";  
 
 const menuItems = [
   { label: "Dashboard", icon: <FaTachometerAlt />, active: true },
