@@ -12,10 +12,7 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.3",
     "react-scripts": "^5.0.1",
-<<<<<<< HEAD
     "recharts": "^3.1.0",
-=======
->>>>>>> 537a126e4047cb36f1035904d342dd45854f54ca
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -43,8 +40,6 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.4"
+    "tailwindcss": "^3.4.17"
   }
 }

@@ -17,10 +17,7 @@ export const menuItems = [
   { label: "Sales", icon: <FaComments /> },
   { label: "Vouchers", icon: <FaListUl /> },
   { label: "Reports", icon: <FaFileAlt /> },
-<<<<<<< HEAD
-=======
   { label: "Expense", icon: <FaCalendarAlt /> },
->>>>>>> 537a126e4047cb36f1035904d342dd45854f54ca
 ];
 
 export const bottomItems = [

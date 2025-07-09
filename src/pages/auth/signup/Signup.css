@@ -207,7 +207,7 @@ button[type="submit"]:hover {
   content: "";
   flex: 1;
   height: 2px;
-  background: #d1d5db; /* light gray, aap apna color bhi rakh sakte hain */
+  background: #d1d5db;
   margin: 0 10px;
   border-radius: 2px;
 }

@@ -1,7 +1,7 @@
 import "./App.css";
-import Webroutes from "./routes/Webroutes";
+import WebRoutes from "./routes/Webroutes";
 
 function App() {
-  return <Webroutes />;
+  return <WebRoutes />;
 }
 export default App;

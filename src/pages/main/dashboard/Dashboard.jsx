@@ -1,30 +1,9 @@
 import { useState } from "react";
-import {
-  FaFileAlt,
-  FaSignOutAlt,
-  FaTachometerAlt,
-  FaUser,
-  FaChartLine,
-  FaBox,
-  FaMoneyBillWave,
-} from "react-icons/fa";
+import { FaBox, FaChartLine, FaFileAlt, FaMoneyBillWave } from "react-icons/fa";
 import Sidebar from "../../../components/Sidebar/Sidebar.jsx";
 import Topbar from "../../../components/Topbar/Topbar.jsx";
-import DashboardCard from "./dashboardcard/DashboardCard";
-import SalesChart from "../saleschart/SalesChart";
-
-const menuItems = [
-  {
-    label: "Dashboard",
-    link: "/dashboard",
-    icon: <FaTachometerAlt />,
-    active: true,
-  },
-  { label: "Products", link: "/products", icon: <FaFileAlt /> },
-  { label: "Accounts", link: "/accounts", icon: <FaUser /> },
-  // ...baqi menu items
-  { label: "Logout", link: "/logout", icon: <FaSignOutAlt /> },
-];
+import SalesChart from "../saleschart/SalesChart.jsx";
+import DashboardCard from "./dashboardcard/DashboardCard.jsx";
 
 const user = {
   name: "Usman",
@@ -33,16 +12,12 @@ const user = {
 };
 
 function Dashboard() {
-  const [language, setLanguage] = useState("en"); // default English
+  const [language, setLanguage] = useState("en");
 
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar />
-      <Topbar
-        user={user}
-        language={language}
-        onLanguageChange={setLanguage}
-      />
+      <Topbar user={user} language={language} onLanguageChange={setLanguage} />
       <div className="ml-60 pt-20 bg-gray-100 min-h-screen w-full">
         <main className="p-0 w-full">
           <h1 className="text-2xl font-bold mb-4 font-nunito">Dashboard</h1>
