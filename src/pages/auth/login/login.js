@@ -1,18 +1,30 @@
-import React, { useState } from "react";
-import "../../App.css";
-import logo from "../../../assets/logo.png";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../../../src/App.css";
+import logo from "../../../assets/images/logo.png";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
   return (
     <div className="signup-container">
       <div className="signup-left">
         <img src={logo} alt="Crushpoint Logo" className="logo" />
       </div>
       <div className="signup-right">
-        <form className="signup-form" onSubmit={e => e.preventDefault()}>
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "10px", marginBottom: "-20px" }}>
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "10px",
+              marginBottom: "-20px",
+            }}
+          >
             <svg width="80" height="80" viewBox="0 0 60 60">
               {/* Top semi-circle (head) */}
               <path d="M10 35 Q30 0 50 35 Z" fill="#7c3aed" />
@@ -45,15 +57,29 @@ function Login() {
             >
               {showPassword ? (
                 // Eye-off SVG
-                <svg width="19" height="18" fill="none" stroke="#fff" strokeWidth="1" viewBox="0 0 24 24">
-                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-6.06M1 1l22 22"/>
-                  <path d="M9.53 9.53A3 3 0 0 0 12 15a3 3 0 0 0 2.47-5.47"/>
+                <svg
+                  width="19"
+                  height="18"
+                  fill="none"
+                  stroke="#fff"
+                  strokeWidth="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-6.06M1 1l22 22" />
+                  <path d="M9.53 9.53A3 3 0 0 0 12 15a3 3 0 0 0 2.47-5.47" />
                 </svg>
               ) : (
                 // Eye SVG
-                <svg width="18" height="18" fill="none" stroke="#fff" strokeWidth="1" viewBox="0 0 24 24">
-                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
-                  <circle cx="12" cy="12" r="3"/>
+                <svg
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="#fff"
+                  strokeWidth="1"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                  <circle cx="12" cy="12" r="3" />
                 </svg>
               )}
             </span>
@@ -61,9 +87,7 @@ function Login() {
           <button type="submit" className="signup-btn">
             Login
           </button>
-          <div className="forgot-password-link">
-            Forget Password?
-          </div>
+          <div className="forgot-password-link">Forget Password?</div>
         </form>
       </div>
     </div>

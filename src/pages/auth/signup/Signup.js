@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import "../../App.css"; // Hum styling alag file mein rakhenge
-import logo from "../../../assets/logo.png";
-import { FaUserCircle, FaQuestionCircle } from "react-icons/fa";
-
+import { useState } from "react";
+import { FaQuestionCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import logo from "../../../assets/images/logo.png";
+import "./Signup.css";
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    navigate("/login");
+  };
 
   return (
     <div className="signup-container">
@@ -13,8 +17,15 @@ function Signup() {
         <img src={logo} alt="Crushpoint Logo" className="logo" />
       </div>
       <div className="signup-right">
-        <form className="signup-form">
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "10px", marginBottom: "-20px" }}>
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "10px",
+              marginBottom: "-20px",
+            }}
+          >
             <svg width="80" height="80" viewBox="0 0 60 60">
               {/* Top semi-circle (head) */}
               <path d="M10 35 Q30 0 50 35 Z" fill="#7c3aed" />
@@ -49,15 +60,29 @@ function Signup() {
                 >
                   {showPassword ? (
                     // Eye-off SVG
-                    <svg width="19" height="18" fill="none" stroke="#fff" strokeWidth="1" viewBox="0 0 24 24">
-                      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-6.06M1 1l22 22"/>
-                      <path d="M9.53 9.53A3 3 0 0 0 12 15a3 3 0 0 0 2.47-5.47"/>
+                    <svg
+                      width="19"
+                      height="18"
+                      fill="none"
+                      stroke="#fff"
+                      strokeWidth="1"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-6.06M1 1l22 22" />
+                      <path d="M9.53 9.53A3 3 0 0 0 12 15a3 3 0 0 0 2.47-5.47" />
                     </svg>
                   ) : (
                     // Eye SVG
-                    <svg width="18" height="18" fill="none" stroke="#fff" strokeWidth="1" viewBox="0 0 24 24">
-                      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
-                      <circle cx="12" cy="12" r="3"/>
+                    <svg
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="#fff"
+                      strokeWidth="1"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                      <circle cx="12" cy="12" r="3" />
                     </svg>
                   )}
                 </span>
@@ -77,15 +102,29 @@ function Signup() {
                 >
                   {showConfirm ? (
                     // Eye-off SVG
-                    <svg width="18" height="18" fill="none" stroke="#fff" strokeWidth="1" viewBox="0 0 24 24">
-                      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-6.06M1 1l22 22"/>
-                      <path d="M9.53 9.53A3 3 0 0 0 12 15a3 3 0 0 0 2.47-5.47"/>
+                    <svg
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="#fff"
+                      strokeWidth="1"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-6.06M1 1l22 22" />
+                      <path d="M9.53 9.53A3 3 0 0 0 12 15a3 3 0 0 0 2.47-5.47" />
                     </svg>
                   ) : (
                     // Eye SVG
-                    <svg width="18" height="18"fill="none" stroke="#fff" strokeWidth="1" viewBox="0 0 24 24">
-                      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
-                      <circle cx="12" cy="12" r="3"/>
+                    <svg
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="#fff"
+                      strokeWidth="1"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                      <circle cx="12" cy="12" r="3" />
                     </svg>
                   )}
                 </span>
@@ -93,11 +132,15 @@ function Signup() {
             </div>
           </div>
 
-          <button type="submit" className="signup-btn">
-            <FaQuestionCircle style={{marginRight: "-6px", fontSize: "1.2em"}} />
+          <button className="signup-btn" type="submit">
+            <FaQuestionCircle
+              style={{ marginRight: "-6px", fontSize: "1.2em" }}
+            />
             SignUp
           </button>
-          <a href="/login" className="login-link">Login Here!</a>
+          <a href="/login" className="login-link">
+            Login Here!
+          </a>
         </form>
       </div>
     </div>

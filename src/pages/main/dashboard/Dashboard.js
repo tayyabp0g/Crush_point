@@ -1,21 +1,30 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import {
+  FaFileAlt,
+  FaSignOutAlt,
+  FaTachometerAlt,
+  FaUser,
+} from "react-icons/fa";
 import Sidebar from "../../../components/Sidebar/Sidebar.jsx";
-import Topbar from "../../../components/Topbar/Topbar.jsx";  
-import { FaTachometerAlt, FaUser, FaFileAlt, FaSignOutAlt } from "react-icons/fa";
-import logo from "./images/logo.png";
+import Topbar from "../../../components/Topbar/Topbar.jsx";
 
 const menuItems = [
-  { label: "Dashboard", link: "/dashboard", icon: <FaTachometerAlt />, active: true },
+  {
+    label: "Dashboard",
+    link: "/dashboard",
+    icon: <FaTachometerAlt />,
+    active: true,
+  },
   { label: "Products", link: "/products", icon: <FaFileAlt /> },
   { label: "Accounts", link: "/accounts", icon: <FaUser /> },
   // ...baqi menu items
-  { label: "Logout", link: "/logout", icon: <FaSignOutAlt /> }
+  { label: "Logout", link: "/logout", icon: <FaSignOutAlt /> },
 ];
 
 const user = {
   name: "Usman",
   role: "Admin",
-  avatar: "https://randomuser.me/api/portraits/men/1.jpg"
+  avatar: "https://randomuser.me/api/portraits/men/1.jpg",
 };
 
 function Dashboard() {
