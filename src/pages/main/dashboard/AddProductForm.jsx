@@ -1,0 +1,118 @@
+import React, { useState } from "react";
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import Topbar from "../../../components/Topbar/Topbar";
+import { useNavigate } from "react-router-dom";
+
+const user = {
+  name: "Usman",
+  role: "Admin",
+  avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+};
+
+export default function AddProductForm() {
+  const [language, setLanguage] = useState("en");
+  const [form, setForm] = useState({
+    code: "",
+    unit: "",
+    name: "",
+    salePrice: "",
+    description: "",
+  });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/add-product", {
+      state: {
+        newProduct: {
+          code: form.code,
+          unit: Number(form.unit), // <-- Yeh add karein
+          name: form.name,
+          salePrice: Number(form.salePrice),
+          description: form.description,
+        },
+      },
+    });
+  };
+
+  return (
+    <div className="flex h-screen bg-[#f6f8fc]">
+      <Sidebar />
+      <Topbar user={user} language={language} onLanguageChange={setLanguage} />
+      <div className="ml-60 pt-20 bg-[#f6f8fc] min-h-screen w-full">
+        <main className="p-6 w-full">
+          <h1 className="text-3xl font-bold font-nunito mb-8 text-center">Add New Product</h1>
+          <div className="max-w-xl mx-auto bg-white rounded-3xl shadow p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block font-semibold mb-1">Product Code :</label>
+                <input
+                  type="text"
+                  name="code"
+                  value={form.code}
+                  onChange={handleChange}
+                  className="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-400"
+                  placeholder="Enter your product code"
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">Measure Unit <span className="text-red-500">*</span> :</label>
+                <input
+                  type="text"
+                  name="unit"
+                  value={form.unit}
+                  onChange={handleChange}
+                  className="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-400"
+                  placeholder="Select a measure unit"
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">Product Name <span className="text-red-500">*</span> :</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  className="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-400"
+                  placeholder="Enter your product name"
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">Sale Price <span className="text-red-500">*</span> :</label>
+                <input
+                  type="number"
+                  name="salePrice"
+                  value={form.salePrice}
+                  onChange={handleChange}
+                  className="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-400"
+                  placeholder="Enter your Sale Price"
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">Description <span className="text-red-500">*</span> :</label>
+                <input
+                  type="text"
+                  name="description"
+                  value={form.description}
+                  onChange={handleChange}
+                  className="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-400"
+                  placeholder="Enter your Description"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded transition font-semibold"
+              >
+                Add Product
+              </button>
+            </form>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+} 
