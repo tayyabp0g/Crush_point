@@ -1544,14 +1544,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-<<<<<<< HEAD
 "@kurkle/color@^0.3.0":
   version "0.3.4"
   resolved "https://registry.npmjs.org/@kurkle/color/-/color-0.3.4.tgz"
   integrity sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==
 
-=======
->>>>>>> 3082cfcbce2a5267a7b605d8a155d76e80cc7abe
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.5"
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.5.tgz"
@@ -3205,7 +3202,6 @@ char-regex@^2.0.0:
   resolved "https://registry.npmjs.org/char-regex/-/char-regex-2.0.2.tgz"
   integrity sha512-cbGOjAptfM2LVmWhwRFHEKTPkLwNddVmuqYZQt895yXwAsWsXObCG+YN4DGQ/JBtT4GP1a1lPPdio2z413LmTg==
 
-<<<<<<< HEAD
 chart.js@^4.1.1, chart.js@^4.5.0:
   version "4.5.0"
   resolved "https://registry.npmjs.org/chart.js/-/chart.js-4.5.0.tgz"
@@ -3213,8 +3209,6 @@ chart.js@^4.1.1, chart.js@^4.5.0:
   dependencies:
     "@kurkle/color" "^0.3.0"
 
-=======
->>>>>>> 3082cfcbce2a5267a7b605d8a155d76e80cc7abe
 check-types@^11.2.3:
   version "11.2.3"
   resolved "https://registry.npmjs.org/check-types/-/check-types-11.2.3.tgz"
@@ -7995,14 +7989,11 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
-<<<<<<< HEAD
 react-chartjs-2@^5.3.0:
   version "5.3.0"
   resolved "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-5.3.0.tgz"
   integrity sha512-UfZZFnDsERI3c3CZGxzvNJd02SHjaSJ8kgW1djn65H1KK8rehwTjyrRKOG3VTMG8wtHZ5rgAO5oTHtHi9GCCmw==
 
-=======
->>>>>>> 3082cfcbce2a5267a7b605d8a155d76e80cc7abe
 react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"

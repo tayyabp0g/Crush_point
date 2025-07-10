@@ -30,7 +30,7 @@ export default function AddProductForm() {
       state: {
         newProduct: {
           code: form.code,
-          unit: Number(form.unit), // <-- Yeh add karein
+          unit: Number(form.unit),
           name: form.name,
           salePrice: Number(form.salePrice),
           description: form.description,

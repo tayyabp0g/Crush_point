@@ -1,72 +1,98 @@
-// src/pages/main/saleschart/SalesChart.jsx
+// SalesChart.jsx
 import React, { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area } from "recharts";
+import {
+  AreaChart, Area, XAxis, YAxis, CartesianGrid,
+  Tooltip, ResponsiveContainer
+} from "recharts";
 
-const data = [
-  { name: "5k", value: 20 },
-  { name: "10k", value: 40 },
-  { name: "15k", value: 35 },
-  { name: "20k", value: 90 },
-  { name: "25k", value: 50 },
-  { name: "30k", value: 60 },
-  { name: "35k", value: 40 },
-  { name: "40k", value: 70 },
-  { name: "45k", value: 60 },
-  { name: "50k", value: 50 },
-  { name: "55k", value: 60 },
-  { name: "60k", value: 50 },
-];
+// Month-wise dummy data
+const monthlyData = {
+  January: [
+    { name: "5k", value: 20 },
+    { name: "10k", value: 40 },
+    { name: "15k", value: 55 },
+    { name: "20k", value: 70 },
+    { name: "25k", value: 50 },
+  ],
+  February: [
+    { name: "5k", value: 25 },
+    { name: "10k", value: 38 },
+    { name: "15k", value: 52 },
+    { name: "20k", value: 30 },
+    { name: "25k", value: 60 },
+  ],
+  March: [
+    { name: "5k", value: 10 },
+    { name: "10k", value: 35 },
+    { name: "15k", value: 60 },
+    { name: "20k", value: 80 },
+    { name: "25k", value: 55 },
+  ],
+};
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+function SalesChart() {
+  const [selectedMonth, setSelectedMonth] = useState("January");
 
-export default function SalesChart() {
-  const [selectedMonth, setSelectedMonth] = useState("October");
+  const handleMonthChange = (e) => {
+    setSelectedMonth(e.target.value);
+  };
+
+  const data = monthlyData[selectedMonth];
 
   return (
-    <div className="bg-white rounded-xl shadow p-6 mt-8 w-full">
-      <div className="flex justify-between items-center mb-4">
-        <div className="font-bold text-xl">Sales Details</div>
+    <div style={{
+      width: "95%",
+      height: "auto",
+      backgroundColor: "#fff",
+      padding: "20px",
+      borderRadius: "15px",
+      boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+    }}>
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "10px"
+      }}>
+        <h2 className="font-nunito font-bold text-[24px]">Sales Details</h2>
         <select
-          className="border border-gray-300 rounded px-2 py-1"
           value={selectedMonth}
-          onChange={(e) => setSelectedMonth(e.target.value)}
+          onChange={handleMonthChange}
+          style={{
+            padding: "5px 10px",
+            borderRadius: "5px",
+            border: "1px solid #ccc"
+          }}
         >
-          {months.map((month) => (
-            <option key={month} value={month}>
-              {month}
-            </option>
+          {Object.keys(monthlyData).map((month) => (
+            <option key={month} value={month}>{month}</option>
           ))}
         </select>
       </div>
-      <ResponsiveContainer width="100%" height={250}>
-        <LineChart data={data}>
+
+      {/* Chart */}
+      <ResponsiveContainer width="100%" height={200}>
+        <AreaChart data={data}>
           <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#2196f3" stopOpacity={0.15}/>
-              <stop offset="100%" stopColor="#2196f3" stopOpacity={0}/>
+            <linearGradient id="colorBlue" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.4} />
+              <stop offset="100%" stopColor="#3b82f6" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis domain={[0, 100]} tickFormatter={tick => `${tick}%`} />
+          <YAxis domain={[0, 100]} />
           <Tooltip />
-          <Area type="monotone" dataKey="value" fill="url(#colorUv)" stroke={false} />
-          <Line type="monotone" dataKey="value" stroke="#2196f3" strokeWidth={2} dot={{ r: 4 }} />
-        </LineChart>
+          <Area
+            type="monotone"
+            dataKey="value"
+            stroke="#3b82f6"
+            fill="url(#colorBlue)"
+            dot={{ r: 3 }}
+          />
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );
 }
+
+export default SalesChart;
