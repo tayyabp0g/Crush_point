@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import Topbar from "../../../components/Topbar/Topbar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const user = {
   name: "Usman",
@@ -11,14 +11,16 @@ const user = {
 
 export default function AddProductForm() {
   const [language, setLanguage] = useState("en");
-  const [form, setForm] = useState({
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [form, setForm] = useState(location.state?.product || {
     code: "",
     unit: "",
     name: "",
     salePrice: "",
     description: "",
   });
-  const navigate = useNavigate();
+  const index = location.state?.index;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,17 +28,30 @@ export default function AddProductForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/add-product", {
-      state: {
-        newProduct: {
-          code: form.code,
-          unit: Number(form.unit),
-          name: form.name,
-          salePrice: Number(form.salePrice),
-          description: form.description,
+    if (index !== undefined) {
+      // Edit mode
+      navigate("/add-product", { state: { updatedProduct: form, index } });
+    } else {
+      // Add mode
+      navigate("/add-product", {
+        state: {
+          newProduct: {
+            id: Date.now() + Math.random(), // unique id
+            code: form.code,
+            unit: Number(form.unit),
+            name: form.name,
+            salePrice: Number(form.salePrice),
+            description: form.description,
+          },
         },
-      },
-    });
+      });
+    }
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    // index zaroor bhejein
+    navigate("/add-product", { state: { updatedProduct: form, index: location.state?.index } });
   };
 
   return (
@@ -107,7 +122,7 @@ export default function AddProductForm() {
                 type="submit"
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded transition font-semibold"
               >
-                Add Product
+                {index !== undefined ? "Update" : "Add New Product"}
               </button>
             </form>
           </div>

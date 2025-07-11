@@ -9,43 +9,55 @@ const user = {
   avatar: "https://randomuser.me/api/portraits/men/1.jpg",
 };
 
-const initialRows = [
-  { sr: 1, name: "Liquid Petroleum Gas", code: "LPG", salePrice: 0, unit: 0 },
-  { sr: 2, name: "Bajar 3\"", code: "LDO", salePrice: 0, unit: 0 },
-  { sr: 2, name: "Bajar 2\"", code: "LDO", salePrice: 0, unit: 0 },
-  { sr: 2, name: "Khaka", code: "LDO", salePrice: 0, unit: 0 },
-  { sr: 2, name: "Bajar 2\"", code: "LDO", salePrice: 0, unit: 0 },
-  { sr: 2, name: "Pathar", code: "LDO", salePrice: 0, unit: 0 },
-  { sr: 2, name: "Khaka", code: "LDO", salePrice: 0, unit: 0 },
-  { sr: 2, name: "Light Diesel Oil", code: "LDO", salePrice: 0, unit: 0 },
-  { sr: 2, name: "Khaka", code: "LDO", salePrice: 0, unit: 0 },
-];
+const initialRows = []; // <-- sirf yeh line change karein
+
+const LOCAL_KEY = "manage_product_rows";
 
 export default function AddProduct() {
   const [language, setLanguage] = useState("en");
-  const [rows, setRows] = useState(initialRows);
+  // Load from localStorage or use initialRows
+  const [rows, setRows] = useState(() => {
+    const saved = localStorage.getItem(LOCAL_KEY);
+    return saved ? JSON.parse(saved) : initialRows;
+  });
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Save to localStorage whenever rows change
   useEffect(() => {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(rows));
+  }, [rows]);
+
+  useEffect(() => {
+    // Prevent double add/edit due to React Strict Mode
     if (location.state && location.state.newProduct) {
-      setRows((prevRows) => [
-        ...prevRows,
-        { sr: prevRows.length + 1, ...location.state.newProduct },
-      ]);
+      // Only add if id is unique
+      if (
+        location.state.newProduct.id &&
+        !rows.some(row => row.id === location.state.newProduct.id)
+      ) {
+        setRows((prevRows) => [
+          ...prevRows,
+          { sr: prevRows.length + 1, ...location.state.newProduct },
+        ]);
+      }
       window.history.replaceState({}, document.title);
-    } else if (location.state && location.state.updatedProduct) {
+      navigate("/add-product", { replace: true });
+      return;
+    } else if (location.state && location.state.updatedProduct !== undefined) {
       setRows((prevRows) => {
-        const updatedRows = prevRows.map((row) =>
-          row.code === location.state.updatedProduct.code
-            ? { ...row, ...location.state.updatedProduct }
-            : row
-        );
+        const updatedRows = [...prevRows];
+        updatedRows[location.state.index] = {
+          ...updatedRows[location.state.index],
+          ...location.state.updatedProduct,
+        };
         return updatedRows;
       });
       window.history.replaceState({}, document.title);
+      navigate("/add-product", { replace: true }); // clear state after update
+      return;
     }
-  }, [location.state]);
+  }, [location.state, navigate]);
 
   return (
     <div className="flex h-screen bg-[#f6f8fc]">
@@ -54,7 +66,7 @@ export default function AddProduct() {
       <div className="ml-60 pt-20 bg-[#f6f8fc] min-h-screen w-full">
         <main className="p-6 w-full">
           <div className="flex justify-between items-center mb-4">
-            <h1 className="text-3xl font-bold font-nunito">Products</h1>
+            <h1 className="text-3xl font-bold font-nunito">Manage Product</h1>
             <button
               onClick={() => navigate("/add-product/new")}
               className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -76,8 +88,8 @@ export default function AddProduct() {
               </thead>
               <tbody>
                 {rows.map((row, idx) => (
-                  <tr key={idx} className="border-b hover:bg-gray-50">
-                    <td className="px-4 py-2">{row.sr}</td>
+                  <tr key={row.id} className="border-b hover:bg-gray-50">
+                    <td className="px-4 py-2">{idx + 1}</td>
                     <td className="px-4 py-2">{row.name}</td>
                     <td className="px-4 py-2">{row.code}</td>
                     <td className="px-4 py-2">
@@ -89,12 +101,19 @@ export default function AddProduct() {
                     <td className="px-4 py-2 space-x-2">
                       <span
                         className="cursor-pointer text-gray-500 hover:text-blue-600"
-                        onClick={() => navigate("/manage-product", { state: { product: row, index: idx } })}
+                        onClick={() => navigate("/add-product/edit", { state: { product: row, id: row.id, index: idx } })}
                       >
                         ✏️
                       </span>
                       <span className="cursor-pointer text-gray-500 hover:text-blue-600">📋</span>
-                      <span className="cursor-pointer text-gray-500 hover:text-red-500">🗑️</span>
+                      <span
+                        className="cursor-pointer text-gray-500 hover:text-red-500"
+                        onClick={() => {
+                          setRows((prevRows) => prevRows.filter((_, i) => i !== idx));
+                        }}
+                      >
+                        🗑️
+                      </span>
                     </td>
                   </tr>
                 ))}

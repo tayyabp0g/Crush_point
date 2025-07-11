@@ -4,7 +4,6 @@ import Signup from "../pages/auth/signup/Signup";
 import Dashboard from "../pages/main/dashboard/Dashboard";
 import AddProduct from "../pages/main/dashboard/AddProduct";
 import AddProductForm from "../pages/main/dashboard/AddProductForm";
-import ManageProduct from "../pages/main/dashboard/ManageProduct";
 import Settings from "../pages/main/dashboard/Settings";
 import Logout from "../pages/main/dashboard/Logout";
 import Accounts from "../pages/main/dashboard/Accounts";
@@ -24,7 +23,7 @@ export default function WebRoutes() {
         <Route path="/products" element={<Dashboard />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/add-product/new" element={<AddProductForm />} />
-        <Route path="/manage-product" element={<ManageProduct />} />
+        <Route path="/add-product/edit" element={<AddProductForm />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/accounts" element={<Accounts />} />

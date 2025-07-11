@@ -108,28 +108,8 @@ export default function Sidebar() {
                           navigate("/add-product");
                         }}
                       >
-                        Add Product
-                        {activeSubMenu === "Add Product" && (
-                          <svg className="ml-2" width="16" height="16" fill="none" stroke="#388bff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M5 8h6M8 5l3 3-3 3"/>
-                          </svg>
-                        )}
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className={`w-full text-left px-2 py-1 rounded text-sm flex items-center justify-between transition
-                  ${activeSubMenu === "Manage Product" ? "bg-blue-100 text-blue-700" : "hover:bg-blue-50"}
-                `}
-                        onClick={() => {
-                          setActiveMenu("Products");
-                          setActiveSubMenu("Manage Product");
-                          setActiveBottom(""); // clear bottom highlight
-                          navigate("/manage-product");
-                        }}
-                      >
                         Manage Product
-                        {activeSubMenu === "Manage Product" && (
+                        {activeSubMenu === "Add Product" && (
                           <svg className="ml-2" width="16" height="16" fill="none" stroke="#388bff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 8h6M8 5l3 3-3 3"/>
                           </svg>
