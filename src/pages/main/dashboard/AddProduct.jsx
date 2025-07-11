@@ -34,6 +34,16 @@ export default function AddProduct() {
         { sr: prevRows.length + 1, ...location.state.newProduct },
       ]);
       window.history.replaceState({}, document.title);
+    } else if (location.state && location.state.updatedProduct) {
+      setRows((prevRows) => {
+        const updatedRows = prevRows.map((row) =>
+          row.code === location.state.updatedProduct.code
+            ? { ...row, ...location.state.updatedProduct }
+            : row
+        );
+        return updatedRows;
+      });
+      window.history.replaceState({}, document.title);
     }
   }, [location.state]);
 
@@ -46,8 +56,8 @@ export default function AddProduct() {
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-3xl font-bold font-nunito">Products</h1>
             <button
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition"
               onClick={() => navigate("/add-product/new")}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
             >
               Add New Product
             </button>
@@ -77,7 +87,12 @@ export default function AddProduct() {
                       {typeof row.unit === "number" ? row.unit.toFixed(6) : row.unit}
                     </td>
                     <td className="px-4 py-2 space-x-2">
-                      <span className="cursor-pointer text-gray-500 hover:text-blue-600">✏️</span>
+                      <span
+                        className="cursor-pointer text-gray-500 hover:text-blue-600"
+                        onClick={() => navigate("/manage-product", { state: { product: row, index: idx } })}
+                      >
+                        ✏️
+                      </span>
                       <span className="cursor-pointer text-gray-500 hover:text-blue-600">📋</span>
                       <span className="cursor-pointer text-gray-500 hover:text-red-500">🗑️</span>
                     </td>
