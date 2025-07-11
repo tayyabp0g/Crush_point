@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import Topbar from "../../../components/Topbar/Topbar";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -22,6 +22,7 @@ export default function AddProduct() {
   });
   const navigate = useNavigate();
   const location = useLocation();
+  const justAddedRef = useRef(false); // <--- add this line
 
   // Save to localStorage whenever rows change
   useEffect(() => {
@@ -31,15 +32,16 @@ export default function AddProduct() {
   useEffect(() => {
     // Prevent double add/edit due to React Strict Mode
     if (location.state && location.state.newProduct) {
-      // Only add if id is unique
       if (
         location.state.newProduct.id &&
-        !rows.some(row => row.id === location.state.newProduct.id)
+        !rows.some(row => row.id === location.state.newProduct.id) &&
+        !justAddedRef.current // <--- only add if not just added
       ) {
         setRows((prevRows) => [
           ...prevRows,
           { sr: prevRows.length + 1, ...location.state.newProduct },
         ]);
+        justAddedRef.current = true; // <--- mark as just added
       }
       window.history.replaceState({}, document.title);
       navigate("/add-product", { replace: true });
@@ -57,6 +59,8 @@ export default function AddProduct() {
       navigate("/add-product", { replace: true }); // clear state after update
       return;
     }
+    // Reset justAddedRef after navigation
+    justAddedRef.current = false;
   }, [location.state, navigate]);
 
   return (
