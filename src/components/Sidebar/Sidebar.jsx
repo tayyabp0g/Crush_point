@@ -8,6 +8,7 @@ export default function Sidebar() {
   const [activeMenu, setActiveMenu] = useState("Dashboard"); // ya default route
   const [openMenu, setOpenMenu] = useState(null);
   const [activeSubMenu, setActiveSubMenu] = useState("");
+  const [activeBottom, setActiveBottom] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,17 +17,51 @@ export default function Sidebar() {
       setActiveMenu("Products");
       setOpenMenu("Products");
       setActiveSubMenu("Add Product");
+      // setActiveBottom(""); // don't reset bottom
     } else if (location.pathname === "/manage-product") {
       setActiveMenu("Products");
       setOpenMenu("Products");
       setActiveSubMenu("Manage Product");
+      // setActiveBottom(""); // don't reset bottom
     } else if (location.pathname === "/dashboard") {
       setActiveMenu("Dashboard");
+      setOpenMenu(null);
+      setActiveSubMenu("");
+      // setActiveBottom(""); // don't reset bottom
+    } else if (location.pathname === "/accounts") {
+      setActiveMenu("Accounts");
+      setOpenMenu(null);
+      setActiveSubMenu("");
+      // setActiveBottom(""); // don't reset bottom
+    } else if (location.pathname === "/sales") {
+      setActiveMenu("Sales");
+      setOpenMenu(null);
+      setActiveSubMenu("");
+      // setActiveBottom(""); // don't reset bottom
+    } else if (location.pathname === "/vouchers") {
+      setActiveMenu("Vouchers");
+      setOpenMenu(null);
+      setActiveSubMenu("");
+      // setActiveBottom(""); // don't reset bottom
+    } else if (location.pathname === "/reports") {
+      setActiveMenu("Reports");
+      setOpenMenu(null);
+      setActiveSubMenu("");
+      // setActiveBottom(""); // don't reset bottom
+    } else if (location.pathname === "/settings") {
+      setActiveBottom("Settings");
+      setActiveMenu("");
+      setOpenMenu(null);
+      setActiveSubMenu("");
+    } else if (location.pathname === "/logout") {
+      setActiveBottom("Logout");
+      setActiveMenu("");
       setOpenMenu(null);
       setActiveSubMenu("");
     } else {
       setActiveSubMenu("");
       setOpenMenu(null);
+      // setActiveBottom(""); // don't reset bottom
     }
   }, [location.pathname]);
 
@@ -48,6 +83,7 @@ export default function Sidebar() {
                     setOpenMenu(openMenu === "Products" ? null : "Products");
                     setActiveMenu("Products");
                     setActiveSubMenu("");
+                    setActiveBottom(""); // clear bottom highlight
                   }}
                 >
                   {item.icon}
@@ -68,6 +104,7 @@ export default function Sidebar() {
                         onClick={() => {
                           setActiveMenu("Products");
                           setActiveSubMenu("Add Product");
+                          setActiveBottom(""); // clear bottom highlight
                           navigate("/add-product");
                         }}
                       >
@@ -87,6 +124,7 @@ export default function Sidebar() {
                         onClick={() => {
                           setActiveMenu("Products");
                           setActiveSubMenu("Manage Product");
+                          setActiveBottom(""); // clear bottom highlight
                           navigate("/manage-product");
                         }}
                       >
@@ -111,7 +149,12 @@ export default function Sidebar() {
                   onClick={() => {
                     setActiveMenu(item.label);
                     setActiveSubMenu("");
+                    setActiveBottom(""); // clear bottom highlight
                     if (item.label === "Dashboard") navigate("/dashboard");
+                    if (item.label === "Accounts") navigate("/accounts");
+                    if (item.label === "Sales") navigate("/sales");
+                    if (item.label === "Vouchers") navigate("/vouchers");
+                    if (item.label === "Reports") navigate("/reports");
                   }}
                 >
                   {item.icon}
@@ -127,9 +170,11 @@ export default function Sidebar() {
           {bottomItems.map((item) => (
             <li key={item.label}>
               <button
-                className="flex items-center w-full px-4 py-2 rounded transition hover:bg-blue-100"
+                className={`flex items-center w-full px-4 py-2 rounded transition ${activeBottom === item.label ? "bg-blue-600 text-white" : "hover:bg-blue-100"}`}
                 onClick={() => {
-                  // Yahan apna navigation logic lagao
+                  setActiveBottom(item.label);
+                  if (item.label === "Settings") navigate("/settings");
+                  if (item.label === "Logout") navigate("/logout");
                 }}
               >
                 {item.icon}

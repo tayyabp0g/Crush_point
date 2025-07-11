@@ -5,6 +5,13 @@ import Dashboard from "../pages/main/dashboard/Dashboard";
 import AddProduct from "../pages/main/dashboard/AddProduct";
 import AddProductForm from "../pages/main/dashboard/AddProductForm";
 import ManageProduct from "../pages/main/dashboard/ManageProduct";
+import Settings from "../pages/main/dashboard/Settings";
+import Logout from "../pages/main/dashboard/Logout";
+import Accounts from "../pages/main/dashboard/Accounts";
+import Sales from "../pages/main/dashboard/Sales";
+import Vouchers from "../pages/main/dashboard/Vouchers";
+import Reports from "../pages/main/dashboard/Reports";
+
 
 export default function WebRoutes() {
   return (
@@ -18,6 +25,12 @@ export default function WebRoutes() {
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/add-product/new" element={<AddProductForm />} />
         <Route path="/manage-product" element={<ManageProduct />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/accounts" element={<Accounts />} />
+        <Route path="/sales" element={<Sales />} />
+        <Route path="/vouchers" element={<Vouchers />} />
+        <Route path="/reports" element={<Reports />} />
       </Routes>
     </BrowserRouter>
   );
