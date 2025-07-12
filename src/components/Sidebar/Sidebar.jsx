@@ -13,7 +13,9 @@ export default function Sidebar() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/add-product" || location.pathname === "/add-product/new") {
+    if (
+      location.pathname.startsWith("/add-product")
+    ) {
       setActiveMenu("Products");
       setOpenMenu("Products");
       setActiveSubMenu("Add Product");
@@ -154,7 +156,13 @@ export default function Sidebar() {
                 onClick={() => {
                   setActiveBottom(item.label);
                   if (item.label === "Settings") navigate("/settings");
-                  if (item.label === "Logout") navigate("/logout");
+                  if (item.label === "Logout") {
+                    // Clear stored data
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    // Navigate to login page
+                    navigate("/login");
+                  }
                 }}
               >
                 {item.icon}

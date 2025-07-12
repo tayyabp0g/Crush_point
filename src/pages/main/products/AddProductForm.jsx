@@ -21,6 +21,7 @@ export default function AddProductForm() {
     description: "",
   });
   const index = location.state?.index;
+  const isEdit = index !== undefined;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -60,7 +61,7 @@ export default function AddProductForm() {
       <Topbar user={user} language={language} onLanguageChange={setLanguage} />
       <div className="ml-60 pt-20 bg-[#f6f8fc] min-h-screen w-full">
         <main className="p-6 w-full">
-          <h1 className="text-xl font-bold font-nunito mb-2 text-center">Add New Product</h1>
+          <h1 className="text-xl font-bold font-nunito mb-2 text-center">{isEdit ? 'Update Product' : 'Add New Product'}</h1>
           <div className="max-w-xs bg-white rounded-xl shadow p-2 md:p-3 mx-auto">
             <form onSubmit={handleSubmit} className="space-y-2">
               <div>

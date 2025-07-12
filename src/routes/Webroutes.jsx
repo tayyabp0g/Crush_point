@@ -2,14 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "../pages/auth/login/login";
 import Signup from "../pages/auth/signup/Signup";
 import Dashboard from "../pages/main/dashboard/Dashboard";
-import AddProduct from "../pages/main/dashboard/AddProduct";
-import AddProductForm from "../pages/main/dashboard/AddProductForm";
-import Settings from "../pages/main/dashboard/Settings";
-import Logout from "../pages/main/dashboard/Logout";
-import Accounts from "../pages/main/dashboard/Accounts";
-import Sales from "../pages/main/dashboard/Sales";
-import Vouchers from "../pages/main/dashboard/Vouchers";
-import Reports from "../pages/main/dashboard/Reports";
+import AddProduct from "../pages/main/products/AddProduct";
+import AddProductForm from "../pages/main/products/AddProductForm";
+import Settings from "../pages/main/setting/Settings";
+import Accounts from "../pages/main/accounnts/Accounts";
+import Sales from "../pages/main/sales/Sales";
+import Vouchers from "../pages/main/vouchers/Vouchers";
+import Reports from "../pages/main/Reports/Reports";
 
 
 export default function WebRoutes() {
@@ -25,7 +24,6 @@ export default function WebRoutes() {
         <Route path="/add-product/new" element={<AddProductForm />} />
         <Route path="/add-product/edit" element={<AddProductForm />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/logout" element={<Logout />} />
         <Route path="/accounts" element={<Accounts />} />
         <Route path="/sales" element={<Sales />} />
         <Route path="/vouchers" element={<Vouchers />} />

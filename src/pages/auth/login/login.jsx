@@ -2,9 +2,18 @@ import logo from "../../../assets/images/logo.png";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import bgImg from "../../../assets/images/1722823099924.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Add any login validation logic here
+    // For now, just navigate to dashboard
+    navigate("/dashboard");
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-[#4d83fe] font-nunito">
@@ -26,7 +35,7 @@ export default function Login() {
           {/* Overlay */}
           <div className="absolute inset-0 bg-[#39414E] bg-opacity-90"></div>
           {/* Form */}
-          <form className="relative z-10 w-full max-w-md px-8 py-10 flex flex-col gap-4">
+          <form onSubmit={handleLogin} className="relative z-10 w-full max-w-md px-8 py-10 flex flex-col gap-4">
             <div className="flex flex-col items-center mb-4">
               {/* Icon */}
               <svg width="60" height="60" viewBox="0 0 60 60">

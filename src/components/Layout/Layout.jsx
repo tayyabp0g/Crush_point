@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Sidebar from "../../../components/Sidebar/Sidebar";
-import Topbar from "../../../components/Topbar/Topbar";
+import Sidebar from "../Sidebar/Sidebar";
+import Topbar from "../Topbar/Topbar";
 
 const user = {
   name: "Usman",
@@ -8,7 +8,7 @@ const user = {
   avatar: "https://randomuser.me/api/portraits/men/1.jpg",
 };
 
-export default function Logout() {
+export default function Layout({ children }) {
   const [language, setLanguage] = useState("en");
 
   return (
@@ -16,9 +16,8 @@ export default function Logout() {
       <Sidebar />
       <Topbar user={user} language={language} onLanguageChange={setLanguage} />
       <div className="ml-60 pt-20 bg-[#f6f8fc] min-h-screen w-full">
-        <main className="p-8 w-full">
-          <h1 className="text-3xl font-bold font-nunito mb-8">Logout Page</h1>
-          {/* Yahan apna logout ka content daalain */}
+        <main className="p-6 w-full">
+          {children}
         </main>
       </div>
     </div>
