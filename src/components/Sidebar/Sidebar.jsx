@@ -66,11 +66,11 @@ export default function Sidebar() {
   }, [location.pathname]);
 
   return (
-    <div className="fixed top-0 left-0 h-screen w-60 bg-white border-r z-30">
+    <div className="fixed top-0 left-0 h-screen w-60 min-w-[200px] bg-white border-r z-30 overflow-y-auto">
       {/* Logo */}
-      <img src={dashlogo} alt="Dashboard Logo" className="h-28" />
+      <img src={dashlogo} alt="Dashboard Logo" className="h-28 mx-auto" />
       {/* Menu */}
-      <nav className="flex flex-col gap-1 w-full">
+      <nav className="flex flex-col gap-1 md:gap-2 w-full">
         {menuItems.map((item) =>
           item.label === "Products"
             ? (
@@ -146,7 +146,7 @@ export default function Sidebar() {
       </nav>
       {/* Bottom Options */}
       <div className="flex flex-col gap-1 w-full">
-        <ul className="mt-auto ml-0"> {/* ml-4 se left shift ho jayega */}
+        <ul className="mt-auto ml-0">
           {bottomItems.map((item) => (
             <li key={item.label}>
               <button

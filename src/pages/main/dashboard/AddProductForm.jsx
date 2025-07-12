@@ -60,9 +60,9 @@ export default function AddProductForm() {
       <Topbar user={user} language={language} onLanguageChange={setLanguage} />
       <div className="ml-60 pt-20 bg-[#f6f8fc] min-h-screen w-full">
         <main className="p-6 w-full">
-          <h1 className="text-3xl font-bold font-nunito mb-8 text-center">Add New Product</h1>
-          <div className="max-w-xl mx-auto bg-white rounded-3xl shadow p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <h1 className="text-xl font-bold font-nunito mb-2 text-center">Add New Product</h1>
+          <div className="max-w-xs bg-white rounded-xl shadow p-2 md:p-3 mx-auto">
+            <form onSubmit={handleSubmit} className="space-y-2">
               <div>
                 <label className="block font-semibold mb-1">Product Code :</label>
                 <input
@@ -70,7 +70,7 @@ export default function AddProductForm() {
                   name="code"
                   value={form.code}
                   onChange={handleChange}
-                  className="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-400"
+                  className="w-full border rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-400"
                   placeholder="Enter your product code"
                 />
               </div>
@@ -120,7 +120,7 @@ export default function AddProductForm() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded transition font-semibold"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-1.5 rounded transition font-semibold text-sm"
               >
                 {index !== undefined ? "Update" : "Add New Product"}
               </button>
