@@ -13,12 +13,32 @@ const initialRows = []; // <-- sirf yeh line change karein
 
 const LOCAL_KEY = "manage_product_rows";
 
+// Add mock ledger data to each row for demonstration
+const mockLedger = [
+  { date: "2024-06-01", customer: "Ali", outQty: 10, balance: 1000 },
+  { date: "2024-06-05", customer: "Ahmed", outQty: 5, balance: 500 },
+  { date: "2024-06-10", customer: "Sara", outQty: 8, balance: 800 },
+  { date: "2024-07-01", customer: "Bilal", outQty: 12, balance: 1200 },
+];
+
 export default function AddProduct() {
   const [language, setLanguage] = useState("en");
   // Load from localStorage or use initialRows
   const [rows, setRows] = useState(() => {
     const saved = localStorage.getItem(LOCAL_KEY);
-    return saved ? JSON.parse(saved) : initialRows;
+    const loaded = saved ? JSON.parse(saved) : initialRows;
+    // Ensure every product has a ledger array
+    return loaded.map(row => ({
+      ...row,
+      ledger: Array.isArray(row.ledger) && row.ledger.length > 0
+        ? row.ledger
+        : [{
+            date: new Date().toISOString().slice(0, 10),
+            customer: "First Sale",
+            outQty: 0,
+            balance: 0,
+          }]
+    }));
   });
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,18 +50,29 @@ export default function AddProduct() {
   }, [rows]);
 
   useEffect(() => {
-    // Prevent double add/edit due to React Strict Mode
     if (location.state && location.state.newProduct) {
+      // Always add ledger array if not present
+      const newProduct = {
+        ...location.state.newProduct,
+        ledger: Array.isArray(location.state.newProduct.ledger) && location.state.newProduct.ledger.length > 0
+          ? location.state.newProduct.ledger
+          : [{
+              date: new Date().toISOString().slice(0, 10),
+              customer: "First Sale",
+              outQty: 0,
+              balance: 0,
+            }]
+      };
       if (
-        location.state.newProduct.id &&
-        !rows.some(row => row.id === location.state.newProduct.id) &&
-        !justAddedRef.current // <--- only add if not just added
+        newProduct.id &&
+        !rows.some(row => row.id === newProduct.id) &&
+        !justAddedRef.current
       ) {
         setRows((prevRows) => [
           ...prevRows,
-          { sr: prevRows.length + 1, ...location.state.newProduct },
+          { sr: prevRows.length + 1, ...newProduct },
         ]);
-        justAddedRef.current = true; // <--- mark as just added
+        justAddedRef.current = true;
       }
       window.history.replaceState({}, document.title);
       navigate("/add-product", { replace: true });
@@ -49,17 +80,25 @@ export default function AddProduct() {
     } else if (location.state && location.state.updatedProduct !== undefined) {
       setRows((prevRows) => {
         const updatedRows = [...prevRows];
+        // Preserve ledger array if not present in updatedProduct
         updatedRows[location.state.index] = {
           ...updatedRows[location.state.index],
           ...location.state.updatedProduct,
+          ledger: Array.isArray(location.state.updatedProduct.ledger) && location.state.updatedProduct.ledger.length > 0
+            ? location.state.updatedProduct.ledger
+            : (updatedRows[location.state.index].ledger || [{
+                date: new Date().toISOString().slice(0, 10),
+                customer: "First Sale",
+                outQty: 0,
+                balance: 0,
+              }])
         };
         return updatedRows;
       });
       window.history.replaceState({}, document.title);
-      navigate("/add-product", { replace: true }); // clear state after update
+      navigate("/add-product", { replace: true });
       return;
     }
-    // Reset justAddedRef after navigation
     justAddedRef.current = false;
   }, [location.state, navigate]);
 
@@ -109,7 +148,22 @@ export default function AddProduct() {
                       >
                         ✏️
                       </span>
-                      <span className="cursor-pointer text-gray-500 hover:text-blue-600">📋</span>
+                      <span
+                        className="cursor-pointer text-gray-500 hover:text-blue-600"
+                        onClick={() => {
+                          // Find all rows with same name and code
+                          const matchingRows = rows.filter(
+                            r => r.name === row.name && r.code === row.code
+                          );
+                          // Combine all their ledger arrays
+                          const combinedLedger = matchingRows.flatMap(r => Array.isArray(r.ledger) ? r.ledger : []);
+                          navigate(`/product-ledger/${row.id}`, {
+                            state: { product: row, ledger: combinedLedger }
+                          });
+                        }}
+                      >
+                        📋
+                      </span>
                       <span
                         className="cursor-pointer text-gray-500 hover:text-red-500"
                         onClick={() => {

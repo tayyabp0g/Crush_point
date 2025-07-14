@@ -9,6 +9,8 @@ import Accounts from "../pages/main/accounnts/Accounts";
 import Sales from "../pages/main/sales/Sales";
 import Vouchers from "../pages/main/vouchers/Vouchers";
 import Reports from "../pages/main/Reports/Reports";
+import ProductLedger from "../pages/main/products/ProductLedger";
+import ProductLedgerDetail from "../pages/main/products/ProductLedgerDetail";
 
 
 export default function WebRoutes() {
@@ -28,6 +30,8 @@ export default function WebRoutes() {
         <Route path="/sales" element={<Sales />} />
         <Route path="/vouchers" element={<Vouchers />} />
         <Route path="/reports" element={<Reports />} />
+        <Route path="/product-ledger" element={<ProductLedger />} />
+        <Route path="/product-ledger/:id" element={<ProductLedgerDetail />} />
       </Routes>
     </BrowserRouter>
   );

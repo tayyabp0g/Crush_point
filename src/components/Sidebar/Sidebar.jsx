@@ -15,6 +15,7 @@ export default function Sidebar() {
   useEffect(() => {
     if (
       location.pathname.startsWith("/add-product")
+      || location.pathname.startsWith("/product-ledger")
     ) {
       setActiveMenu("Products");
       setOpenMenu("Products");
@@ -74,78 +75,78 @@ export default function Sidebar() {
       {/* Menu */}
       <nav className="flex flex-col gap-1 md:gap-2 w-full">
         <ul className="list-none p-0 m-0">
-          {menuItems.map((item) =>
-            item.label === "Products"
-              ? (
-                <li key={item.label}>
-                  <button
-                    className={`flex items-center w-full px-4 py-2 rounded transition 
+        {menuItems.map((item) =>
+          item.label === "Products"
+            ? (
+              <li key={item.label}>
+                <button
+                  className={`flex items-center w-full px-4 py-2 rounded transition 
             ${(activeMenu === "Products" || activeSubMenu) ? "bg-blue-600 text-white" : "hover:bg-blue-100"}
           `}
-                    onClick={() => {
-                      setOpenMenu(openMenu === "Products" ? null : "Products");
-                      setActiveMenu("Products");
-                      setActiveSubMenu("");
-                      setActiveBottom(""); // clear bottom highlight
-                    }}
-                  >
-                    {item.icon}
-                    <span className="ml-2">{item.label}</span>
-                    {/* Arrow */}
-                    <svg className={`ml-auto transition-transform ${openMenu === 'Products' ? 'rotate-180' : ''}`} width="16" height="16" fill="none" stroke="#222">
-                      <path d="M4 6l4 4 4-4"/>
-                    </svg>
-                  </button>
-                  {/* Submenu */}
-                  {openMenu === "Products" && (
-                    <ul className="ml-8 mt-1 space-y-1">
-                      <li>
-                        <button
-                          className={`w-full text-left px-2 py-1 rounded text-sm flex items-center justify-between transition
+                  onClick={() => {
+                    setOpenMenu(openMenu === "Products" ? null : "Products");
+                    setActiveMenu("Products");
+                    setActiveSubMenu("");
+                    setActiveBottom(""); // clear bottom highlight
+                  }}
+                >
+                  {item.icon}
+                  <span className="ml-2">{item.label}</span>
+                  {/* Arrow */}
+                  <svg className={`ml-auto transition-transform ${openMenu === 'Products' ? 'rotate-180' : ''}`} width="16" height="16" fill="none" stroke="#222">
+                    <path d="M4 6l4 4 4-4"/>
+                  </svg>
+                </button>
+                {/* Submenu */}
+                {openMenu === "Products" && (
+                  <ul className="ml-8 mt-1 space-y-1">
+                    <li>
+                      <button
+                        className={`w-full text-left px-2 py-1 rounded text-sm flex items-center justify-between transition
                   ${activeSubMenu === "Add Product" ? "bg-blue-100 text-blue-700" : "hover:bg-blue-50"}
                 `}
-                          onClick={() => {
-                            setActiveMenu("Products");
-                            setActiveSubMenu("Add Product");
-                            setActiveBottom(""); // clear bottom highlight
-                            navigate("/add-product");
-                          }}
-                        >
-                          Manage Product
-                          {activeSubMenu === "Add Product" && (
-                            <svg className="ml-2" width="16" height="16" fill="none" stroke="#388bff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M5 8h6M8 5l3 3-3 3"/>
-                            </svg>
-                          )}
-                        </button>
-                      </li>
-                    </ul>
-                  )}
-                </li>
-              )
-              : (
-                <li key={item.label}>
-                  <button
-                    className={`flex items-center w-full px-4 py-2 rounded transition 
+                        onClick={() => {
+                          setActiveMenu("Products");
+                          setActiveSubMenu("Add Product");
+                          setActiveBottom(""); // clear bottom highlight
+                          navigate("/add-product");
+                        }}
+                      >
+                        Manage Product
+                        {activeSubMenu === "Add Product" && (
+                          <svg className="ml-2" width="16" height="16" fill="none" stroke="#388bff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 8h6M8 5l3 3-3 3"/>
+                          </svg>
+                        )}
+                      </button>
+                    </li>
+                  </ul>
+                )}
+              </li>
+            )
+            : (
+              <li key={item.label}>
+                <button
+                  className={`flex items-center w-full px-4 py-2 rounded transition 
             ${activeMenu === item.label && !activeSubMenu ? "bg-blue-600 text-white" : "hover:bg-blue-100"}
           `}
-                    onClick={() => {
-                      setActiveMenu(item.label);
-                      setActiveSubMenu("");
-                      setActiveBottom(""); // clear bottom highlight
-                      if (item.label === "Dashboard") navigate("/dashboard");
-                      if (item.label === "Accounts") navigate("/accounts");
-                      if (item.label === "Sales") navigate("/sales");
-                      if (item.label === "Vouchers") navigate("/vouchers");
-                      if (item.label === "Reports") navigate("/reports");
-                    }}
-                  >
-                    {item.icon}
-                    <span className="ml-2">{item.label}</span>
-                  </button>
-                </li>
-              )
-          )}
+                  onClick={() => {
+                    setActiveMenu(item.label);
+                    setActiveSubMenu("");
+                    setActiveBottom(""); // clear bottom highlight
+                    if (item.label === "Dashboard") navigate("/dashboard");
+                    if (item.label === "Accounts") navigate("/accounts");
+                    if (item.label === "Sales") navigate("/sales");
+                    if (item.label === "Vouchers") navigate("/vouchers");
+                    if (item.label === "Reports") navigate("/reports");
+                  }}
+                >
+                  {item.icon}
+                  <span className="ml-2">{item.label}</span>
+                </button>
+              </li>
+            )
+        )}
         </ul>
       </nav>
       {/* Bottom Options */}

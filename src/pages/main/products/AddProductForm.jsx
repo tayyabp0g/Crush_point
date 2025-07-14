@@ -52,12 +52,21 @@ export default function AddProductForm() {
       navigate("/add-product", {
         state: {
           newProduct: {
-            id: Date.now() + Math.random(), // unique id
+            id: Date.now() + Math.random(),
             code: form.code,
             unit: Number(form.unit),
             name: form.name,
             salePrice: Number(form.salePrice),
             description: form.description,
+            // Ledger array with one entry (add more fields as needed)
+            ledger: [
+              {
+                date: new Date().toISOString().slice(0, 10), // YYYY-MM-DD
+                customer: "First Sale",
+                outQty: 0,
+                balance: 0,
+              },
+            ],
           },
         },
       });
