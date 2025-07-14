@@ -20,15 +20,30 @@ export default function AddProductForm() {
     salePrice: "",
     description: "",
   });
+  const [error, setError] = useState("");
   const index = location.state?.index;
   const isEdit = index !== undefined;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setError(""); // clear error on change
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Validation: all fields required, trim for strings, and salePrice/unit must be valid numbers
+    if (
+      !form.code.trim() ||
+      !form.unit.toString().trim() ||
+      !form.name.trim() ||
+      !form.salePrice.toString().trim() ||
+      !form.description.trim() ||
+      isNaN(Number(form.salePrice)) ||
+      isNaN(Number(form.unit))
+    ) {
+      setError("Please fill all fields with valid values.");
+      return;
+    }
     if (index !== undefined) {
       // Edit mode
       navigate("/add-product", { state: { updatedProduct: form, index } });
@@ -64,6 +79,7 @@ export default function AddProductForm() {
           <h1 className="text-xl font-bold font-nunito mb-2 text-center">{isEdit ? 'Update Product' : 'Add New Product'}</h1>
           <div className="max-w-xs bg-white rounded-xl shadow p-2 md:p-3 mx-auto">
             <form onSubmit={handleSubmit} className="space-y-2">
+              {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
               <div>
                 <label className="block font-semibold mb-1">Product Code :</label>
                 <input
