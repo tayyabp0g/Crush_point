@@ -12,7 +12,7 @@ export default function DashboardCard({
   iconType,
 }) {
   return (
-    <div className="bg-white rounded-xl shadow p-2 w-[300px] max-w-[250px] font-nunito">
+    <div className="bg-white rounded-xl shadow p-2 w-[340px] max-w-[300px] font-nunito">
       <div className="flex justify-between items-center mb-2">
         <span className="font-medium text-gray-500">{title}</span>
         {iconType === "special" ? (

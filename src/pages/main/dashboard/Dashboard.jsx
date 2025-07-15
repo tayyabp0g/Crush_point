@@ -29,8 +29,9 @@ function Dashboard() {
 
   return (
     <Layout>
-          <h1 className="text-2xl font-bold mb-4 font-nunito ml-8">Dashboard</h1>
-          <div className="max-w-6xl mx-auto px-4 w-full">
+      <div className="bg-white min-h-screen w-full">
+        <h1 className="text-2xl font-bold mb-4 font-nunito ml-8">Dashboard</h1>
+        <div className="max-w-6xl mx-auto px-4 w-full">
             {/* Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
               <DashboardCard
@@ -95,7 +96,7 @@ function Dashboard() {
             {/* Chart */}
             <SalesChart />
             {/* Neeche 3 Cards (if any) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-4xl mx-auto mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full mt-8">
               <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center max-w-xs w-full mx-auto">
                 {/* Customers Card */}
                 <div className="font-bold text-lg mb-2">Customers</div>
@@ -177,6 +178,7 @@ function Dashboard() {
               </div>
             </div>
           </div>
+      </div>
     </Layout>
   );
 }

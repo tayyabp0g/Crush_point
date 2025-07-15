@@ -17,9 +17,12 @@ export const menuItems = [
   { label: "Sales", icon: <FaComments /> },
   { label: "Vouchers", icon: <FaListUl /> },
   { label: "Reports", icon: <FaFileAlt /> },
-];
-
-export const bottomItems = [
-  { label: "Settings", icon: <FaCog /> },
+  {
+    label: "Settings",
+    icon: <FaCog />,
+    submenu: [
+      { label: "Change Password" },
+    ],
+  },
   { label: "Logout", icon: <FaSignOutAlt /> },
 ];

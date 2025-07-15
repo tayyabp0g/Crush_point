@@ -11,6 +11,7 @@ import Vouchers from "../pages/main/vouchers/Vouchers";
 import Reports from "../pages/main/Reports/Reports";
 import ProductLedger from "../pages/main/products/ProductLedger";
 import ProductLedgerDetail from "../pages/main/products/ProductLedgerDetail";
+import ChangePassword from "../pages/main/setting/ChangePassword";
 
 
 export default function WebRoutes() {
@@ -32,6 +33,7 @@ export default function WebRoutes() {
         <Route path="/reports" element={<Reports />} />
         <Route path="/product-ledger" element={<ProductLedger />} />
         <Route path="/product-ledger/:id" element={<ProductLedgerDetail />} />
+        <Route path="/change-password" element={<ChangePassword />} />
       </Routes>
     </BrowserRouter>
   );
