@@ -42,7 +42,7 @@ export default function Sidebar() {
     } else if (location.pathname === "/accounts") {
       setActiveMenu("Accounts");
       setOpenMenu(null);
-      setActiveSubMenu("");
+      // Do not setActiveSubMenu here, let the click handler control it
     } else if (location.pathname === "/sales") {
       setActiveMenu("Sales");
       setOpenMenu(null);
@@ -180,6 +180,24 @@ export default function Sidebar() {
                   )}
                 </li>
               );
+            } else if (item.label === "Accounts") {
+              return (
+                <li key={item.label} ref={el => menuRefs.current[idx] = el}>
+                  <button
+                    className={`flex items-center w-full px-4 py-2 rounded transition-all duration-200 
+                    ${activeMenu === item.label && !activeSubMenu ? "bg-blue-600 text-white" : "hover:bg-blue-100"}
+                  `}
+                    onClick={() => {
+                      setActiveSubMenu("");
+                      setActiveMenu("Accounts");
+                      navigate("/accounts");
+                    }}
+                  >
+                    {item.icon}
+                    <span className="ml-2">{item.label}</span>
+                  </button>
+                </li>
+              );
             } else {
               return (
                 <li key={item.label} ref={el => menuRefs.current[idx] = el}>
@@ -188,8 +206,8 @@ export default function Sidebar() {
                       ${activeMenu === item.label && !activeSubMenu ? "bg-blue-600 text-white" : "hover:bg-blue-100"}
                     `}
                     onClick={() => {
-                      setActiveMenu(item.label);
                       setActiveSubMenu("");
+                      setActiveMenu(item.label);
                       if (item.label === "Dashboard") navigate("/dashboard");
                       if (item.label === "Accounts") navigate("/accounts");
                       if (item.label === "Sales") navigate("/sales");
